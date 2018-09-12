@@ -76,7 +76,6 @@ export default class Events {
   }
 
   private touchStart(this: Events, event: TouchEvent) {
-    event.preventDefault()
     const touch = event.touches[0] || null
     if (event.touches.length === 1 && touch !== null) {
       this.currentY = touch.pageY
