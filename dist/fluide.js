@@ -116,7 +116,9 @@
             this.scrollbar.scroll.onwheel = function (event) { return _this.mouseWheel(event); };
             this.scrollbar.bar.onmousedown = function (event) { return _this.mouseDown(event); };
             this.scrollbar.el.onscroll = function (event) { return _this.userScrolled(event); };
+            this.scrollbar.el.ontouchstart = function (event) { return _this.touchStart(event); };
             document.onmouseup = function (event) { return _this.mouseUp(event); };
+            document.ontouchend = function (event) { return _this.touchEnd(event); };
             // this.watcher = setTimeout(() => this.tick.call(this), this.fps);
         }
         Events.prototype.tick = function () {
@@ -157,6 +159,28 @@
         };
         Events.prototype.mouseUp = function (event) {
             document.onmousemove = null;
+        };
+        Events.prototype.touchStart = function (event) {
+            var _this = this;
+            event.preventDefault();
+            var touch = event.touches[0] || null;
+            if (event.touches.length === 1 && touch !== null) {
+                this.currentY = touch.pageY;
+                this.scrollbar.el.ontouchmove = function (e) { return _this.touchMove(e); };
+            }
+        };
+        Events.prototype.touchMove = function (event) {
+            event.preventDefault();
+            var touch = event.touches[0] || null;
+            if (event.touches.length === 1 && touch !== null) {
+                var moveDistance = (touch.pageY - this.currentY);
+                var scrollDistance = -moveDistance;
+                this.currentY = touch.pageY;
+                this.scrollbar.move(scrollDistance);
+            }
+        };
+        Events.prototype.touchEnd = function (event) {
+            document.ontouchmove = null;
         };
         Events.prototype.userScrolled = function (event) {
             this.scrollbar.setBarPosition();

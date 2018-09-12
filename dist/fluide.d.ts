@@ -61,6 +61,9 @@ declare module "scrollbar/events" {
         private mouseMove;
         private mouseWheel;
         private mouseUp;
+        private touchStart;
+        private touchMove;
+        private touchEnd;
         private userScrolled;
     }
 }
