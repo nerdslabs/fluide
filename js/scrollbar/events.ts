@@ -20,7 +20,10 @@ export default class Events {
     this.scrollbar.bar.onmousedown = event => this.mouseDown(event)
     this.scrollbar.el.onscroll = event => this.userScrolled(event)
 
+    this.scrollbar.el.ontouchstart = event => this.touchStart(event)
+
     document.onmouseup = event => this.mouseUp(event)
+    document.ontouchend = event => this.touchEnd(event)
 
     this.watcher = setTimeout(() => this.tick.call(this), this.fps);
   }
@@ -70,6 +73,31 @@ export default class Events {
 
   private mouseUp(this: Events, event: MouseEvent) {
     document.onmousemove = null
+  }
+
+  private touchStart(this: Events, event: TouchEvent) {
+    event.preventDefault()
+    const touch = event.touches[0] || null
+    if (event.touches.length === 1 && touch !== null) {
+      this.currentY = touch.pageY
+      this.scrollbar.el.ontouchmove = e => this.touchMove(e)
+    }
+  }
+
+  private touchMove(this: Events, event: TouchEvent) {
+    event.preventDefault()
+    const touch = event.touches[0] || null
+    if (event.touches.length === 1 && touch !== null) {
+      const moveDistance = (touch.pageY - this.currentY)
+      const scrollDistance = -moveDistance
+      this.currentY = touch.pageY
+
+      this.scrollbar.move(scrollDistance)
+    }
+  }
+
+  private touchEnd(this: Events, event: TouchEvent) {
+    document.ontouchmove = null
   }
 
   private userScrolled(this: Events, event: UIEvent) {
