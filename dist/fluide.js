@@ -162,7 +162,6 @@
         };
         Events.prototype.touchStart = function (event) {
             var _this = this;
-            event.preventDefault();
             var touch = event.touches[0] || null;
             if (event.touches.length === 1 && touch !== null) {
                 this.currentY = touch.pageY;
