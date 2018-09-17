@@ -41,7 +41,7 @@ export default class Modal extends Module {
 
   private bindEvents() {
     this.el.onclick = (this.options.closeable ? (event: MouseEvent) => {
-      if (event.target !== this.content) {
+      if (this.content.contains(event.target as Node) === false) {
         this.close()
       }
     } : null)
