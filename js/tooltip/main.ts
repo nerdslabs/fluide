@@ -31,8 +31,10 @@ export default class Tooltip extends Module {
       this.position = position
     }
 
-    this.el.onmouseenter = (event) => this.mouseEnter(event)
-    this.el.onmouseleave = (event) => this.mouseLeave(event)
+    this.el.addEventListener('mouseenter', (event) => this.mouseEnter(event))
+    this.el.addEventListener('mouseleave', (event) => this.mouseLeave(event))
+    this.el.addEventListener('touchend', (event) => this.mouseLeave(event))
+    this.el.addEventListener('DOMNodeRemoved', (event) => this.mouseLeave(event as UIEvent))
   }
 
   private mouseEnter(this: Tooltip, event: UIEvent) {
