@@ -96,7 +96,7 @@
         Modal.prototype.bindEvents = function () {
             var _this = this;
             this.el.onclick = (this.options.closeable ? function (event) {
-                if (event.target !== _this.content) {
+                if (_this.content.contains(event.target) === false) {
                     _this.close();
                 }
             } : null);
@@ -293,8 +293,10 @@
             else {
                 _this.position = position;
             }
-            _this.el.onmouseenter = function (event) { return _this.mouseEnter(event); };
-            _this.el.onmouseleave = function (event) { return _this.mouseLeave(event); };
+            _this.el.addEventListener('mouseenter', function (event) { return _this.mouseEnter(event); });
+            _this.el.addEventListener('mouseleave', function (event) { return _this.mouseLeave(event); });
+            _this.el.addEventListener('touchend', function (event) { return _this.mouseLeave(event); });
+            _this.el.addEventListener('DOMNodeRemoved', function (event) { return _this.mouseLeave(event); });
             return _this;
         }
         Tooltip.prototype.mouseEnter = function (event) {
