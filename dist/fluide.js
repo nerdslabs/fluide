@@ -31,7 +31,7 @@
             this.tickInstances.forEach(function (instance) { return instance.onTick(); });
             this.tickTimout = setTimeout(function () { return _this.tick(); }, this.fps);
         };
-        Object.defineProperty(Props, "all", {
+        Object.defineProperty(Props, "get", {
             get: function () {
                 if (typeof window._fluide === typeof undefined) {
                     window._fluide = new Props();
@@ -56,7 +56,7 @@
                 throw new Error('Provided Element is null or cannot be found.');
             }
             if (this.onTick !== undefined) {
-                Props.all.addTickInstance(this);
+                Props.get.addTickInstance(this);
             }
         }
         return Module;
@@ -119,18 +119,7 @@
             this.scrollbar.el.ontouchstart = function (event) { return _this.touchStart(event); };
             document.onmouseup = function (event) { return _this.mouseUp(event); };
             document.ontouchend = function (event) { return _this.touchEnd(event); };
-            // this.watcher = setTimeout(() => this.tick.call(this), this.fps);
         }
-        Events.prototype.tick = function () {
-            var _this = this;
-            this.watcher = setTimeout(function () { return _this.tick.call(_this); }, this.fps);
-            if (this.scrollbar.el.scrollHeight !== this.scrollbar.scrollHeight) {
-                this.scrollbar.calculateSizes.call(this.scrollbar);
-            }
-            if (this.scrollbar.height !== this.scrollbar.el.clientHeight || this.scrollbar.width !== this.scrollbar.el.clientWidth) {
-                this.scrollbar.calculateSizes.call(this.scrollbar);
-            }
-        };
         Events.prototype.mouseDown = function (event) {
             var _this = this;
             event.preventDefault();
@@ -276,6 +265,7 @@
         function Tooltip(el, position) {
             if (position === void 0) { position = Position.CLASS; }
             var _this = _super.call(this, el) || this;
+            _this.tooltip = null;
             if (position === Position.CLASS) {
                 if (_this.el.className.indexOf('tooltip-top') > -1) {
                     _this.position = Position.TOP;
@@ -296,9 +286,17 @@
             _this.el.addEventListener('mouseenter', function (event) { return _this.mouseEnter(event); });
             _this.el.addEventListener('mouseleave', function (event) { return _this.mouseLeave(event); });
             _this.el.addEventListener('touchend', function (event) { return _this.mouseLeave(event); });
-            _this.el.addEventListener('DOMNodeRemoved', function (event) { return _this.mouseLeave(event); });
             return _this;
         }
+        Tooltip.prototype.onTick = function () {
+            if (this.tooltip !== null && this.tooltip.parentElement !== null) {
+                this.elementMoved.call(this);
+                if (this.el.parentElement === null) {
+                    document.body.removeChild(this.tooltip);
+                    window.onscroll = null;
+                }
+            }
+        };
         Tooltip.prototype.mouseEnter = function (event) {
             var text = this.el.getAttribute('alt');
             this.tooltip = document.createElement('div');
@@ -308,13 +306,13 @@
             var _a = this.calculatePosition(), left = _a.left, top = _a.top;
             this.tooltip.style.left = left + 'px';
             this.tooltip.style.top = top + 'px';
-            window.onscroll = this.mouseScroll.bind(this);
+            // window.onscroll = this.mouseScroll.bind(this)
         };
         Tooltip.prototype.mouseLeave = function (event) {
             document.body.removeChild(this.tooltip);
-            window.onscroll = null;
+            // window.onscroll = null
         };
-        Tooltip.prototype.mouseScroll = function (event) {
+        Tooltip.prototype.elementMoved = function (event) {
             var _a = this.calculatePosition(), left = _a.left, top = _a.top;
             this.tooltip.style.left = left + 'px';
             this.tooltip.style.top = top + 'px';

@@ -8,7 +8,7 @@ declare module "polyfills/props" {
         constructor();
         addTickInstance(c: Module): void;
         tick(): void;
-        static readonly all: Props;
+        static readonly get: Props;
     }
     global {
         interface Window {
@@ -56,7 +56,6 @@ declare module "scrollbar/events" {
         private watcher;
         private fps;
         constructor(scrollbar: Scrollbar);
-        private tick;
         private mouseDown;
         private mouseMove;
         private mouseWheel;
@@ -103,9 +102,10 @@ declare module "tooltip/main" {
         private tooltip;
         private position;
         constructor(el: HTMLElement | string, position?: Position);
+        onTick(): void;
         private mouseEnter;
         private mouseLeave;
-        private mouseScroll;
+        private elementMoved;
         private calculatePosition;
     }
 }
