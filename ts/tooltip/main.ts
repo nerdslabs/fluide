@@ -103,6 +103,9 @@ export default class Tooltip extends Module {
       left = document.documentElement.scrollWidth - this.tooltip.offsetWidth
     }
 
+    left = Math.round(left)
+    top = Math.round(top)
+
     return {
       left, top,
     }
