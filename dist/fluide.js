@@ -343,6 +343,8 @@
             else if (left + this.tooltip.offsetWidth > document.documentElement.scrollWidth) {
                 left = document.documentElement.scrollWidth - this.tooltip.offsetWidth;
             }
+            left = Math.round(left);
+            top = Math.round(top);
             return {
                 left: left, top: top,
             };
