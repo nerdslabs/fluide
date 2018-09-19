@@ -18,7 +18,7 @@ const banner =
 
 const builds = {
   'web-cjs': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'cjs',
     output: {
       sourcemap: true,
@@ -28,7 +28,7 @@ const builds = {
     },
   },
   'web-cjs-min': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'cjs',
     output: {
       sourcemap: true,
@@ -38,7 +38,7 @@ const builds = {
     },
   },
   'web-esm': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'es',
     output: {
       sourcemap: true,
@@ -48,7 +48,7 @@ const builds = {
     },
   },
   'web-esm-min': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'es',
     output: {
       sourcemap: true,
@@ -58,7 +58,7 @@ const builds = {
     },
   },
   'web': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'umd',
     output: {
       sourcemap: true,
@@ -68,7 +68,7 @@ const builds = {
     },
   },
   'web-min': {
-    input: resolve('js/fluide.ts'),
+    input: resolve('ts/fluide.ts'),
     format: 'umd',
     output: {
       sourcemap: true,
@@ -108,7 +108,7 @@ function genConfig(opts, environment) {
     if(env === 'development') {
       config['watch'] = {
         chokidar: true,
-        include: ['js/**']
+        include: ['ts/**']
       }
     }
   }
