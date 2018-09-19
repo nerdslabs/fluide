@@ -24,20 +24,6 @@ export default class Events {
 
     document.onmouseup = event => this.mouseUp(event)
     document.ontouchend = event => this.touchEnd(event)
-
-    this.watcher = setTimeout(() => this.tick.call(this), this.fps);
-  }
-
-  private tick() {
-    this.watcher = setTimeout(() => this.tick.call(this), this.fps);
-
-    if (this.scrollbar.el.scrollHeight !== this.scrollbar.scrollHeight) {
-      this.scrollbar.calculateSizes.call(this.scrollbar)
-    }
-
-    if (this.scrollbar.height !== this.scrollbar.el.clientHeight || this.scrollbar.width !== this.scrollbar.el.clientWidth) {
-      this.scrollbar.calculateSizes.call(this.scrollbar)
-    }
   }
 
   private mouseDown(this: Events, event: MouseEvent) {

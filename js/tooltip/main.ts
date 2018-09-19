@@ -11,7 +11,7 @@ export enum Position {
 export default class Tooltip extends Module {
   public static Position = Position
 
-  private tooltip: HTMLElement
+  private tooltip: HTMLElement = null
   private position: Position
 
   constructor(el: HTMLElement | string, position: Position = Position.CLASS) {
@@ -34,7 +34,17 @@ export default class Tooltip extends Module {
     this.el.addEventListener('mouseenter', (event) => this.mouseEnter(event))
     this.el.addEventListener('mouseleave', (event) => this.mouseLeave(event))
     this.el.addEventListener('touchend', (event) => this.mouseLeave(event))
-    this.el.addEventListener('DOMNodeRemoved', (event) => this.mouseLeave(event as UIEvent))
+  }
+
+  public onTick() {
+    if (this.tooltip !== null && this.tooltip.parentElement !== null) {
+      this.elementMoved.call(this)
+
+      if (this.el.parentElement === null) {
+        document.body.removeChild(this.tooltip)
+        window.onscroll = null
+      }
+    }
   }
 
   private mouseEnter(this: Tooltip, event: UIEvent) {
@@ -51,16 +61,16 @@ export default class Tooltip extends Module {
     this.tooltip.style.left = left + 'px'
     this.tooltip.style.top = top + 'px'
 
-    window.onscroll = this.mouseScroll.bind(this)
+    // window.onscroll = this.mouseScroll.bind(this)
   }
 
   private mouseLeave(this: Tooltip, event: UIEvent) {
     document.body.removeChild(this.tooltip)
 
-    window.onscroll = null
+    // window.onscroll = null
   }
 
-  private mouseScroll(this: Tooltip, event: UIEvent) {
+  private elementMoved(this: Tooltip, event: UIEvent) {
     const { left, top } = this.calculatePosition()
 
     this.tooltip.style.left = left + 'px'

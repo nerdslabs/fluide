@@ -81,6 +81,16 @@ export default class Scrollbar extends Module {
     this.bar.style.marginTop = this.position + 'px';
   }
 
+  public onTick() {
+    if (this.el.scrollHeight !== this.scrollHeight) {
+      this.calculateSizes.call(this)
+    }
+
+    if (this.height !== this.el.clientHeight || this.width !== this.el.clientWidth) {
+      this.calculateSizes.call(this)
+    }
+  }
+
   private createScroll() {
     this.scroll = document.createElement('div')
     this.scroll.className = 'scrollbar-handler'

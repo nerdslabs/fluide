@@ -19,7 +19,7 @@ export default class Props {
     this.tickTimout = setTimeout(() => this.tick(), this.fps)
   }
 
-  static get all(): Props {
+  static get get(): Props {
     if (typeof window._fluide === typeof undefined) {
       window._fluide = new Props()
     }

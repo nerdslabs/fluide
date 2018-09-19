@@ -1,3 +1,9 @@
+import Props from './polyfills/props'
+
+export default interface Module {
+  onTick()
+}
+
 export default abstract class Module {
   public el: HTMLElement
 
@@ -10,6 +16,10 @@ export default abstract class Module {
 
     if (this.el === null) {
       throw new Error('Provided Element is null or cannot be found.')
+    }
+
+    if (this.onTick !== undefined) {
+      Props.get.addTickInstance(this)
     }
   }
 }
