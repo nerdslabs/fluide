@@ -33,21 +33,22 @@ export default class Tooltip extends Module {
 
     this.el.addEventListener('mouseenter', (event) => this.mouseEnter(event))
     this.el.addEventListener('mouseleave', (event) => this.mouseLeave(event))
+    this.el.addEventListener('click', (event) => this.mouseLeave(event))
     this.el.addEventListener('touchend', (event) => this.mouseLeave(event))
   }
 
   public onTick() {
     if (this.tooltip !== null && this.tooltip.parentElement !== null) {
-      this.elementMoved.call(this)
 
       if (this.el.parentElement === null) {
         document.body.removeChild(this.tooltip)
-        window.onscroll = null
+      } else {
+        this.updatePosition.call(this)
       }
     }
   }
 
-  private mouseEnter(this: Tooltip, event: UIEvent) {
+  public show() {
     const text = this.el.getAttribute('alt')
 
     this.tooltip = document.createElement('div')
@@ -60,17 +61,23 @@ export default class Tooltip extends Module {
 
     this.tooltip.style.left = left + 'px'
     this.tooltip.style.top = top + 'px'
+  }
 
-    // window.onscroll = this.mouseScroll.bind(this)
+  public hide() {
+    if (this.tooltip.parentElement !== null) {
+      document.body.removeChild(this.tooltip)
+    }
+  }
+
+  private mouseEnter(this: Tooltip, event: UIEvent) {
+    this.show()
   }
 
   private mouseLeave(this: Tooltip, event: UIEvent) {
-    document.body.removeChild(this.tooltip)
-
-    // window.onscroll = null
+    this.hide()
   }
 
-  private elementMoved(this: Tooltip, event: UIEvent) {
+  private updatePosition(this: Tooltip) {
     const { left, top } = this.calculatePosition()
 
     this.tooltip.style.left = left + 'px'
