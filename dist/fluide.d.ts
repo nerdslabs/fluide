@@ -103,9 +103,11 @@ declare module "tooltip/main" {
         private position;
         constructor(el: HTMLElement | string, position?: Position);
         onTick(): void;
+        show(): void;
+        hide(): void;
         private mouseEnter;
         private mouseLeave;
-        private elementMoved;
+        private updatePosition;
         private calculatePosition;
     }
 }

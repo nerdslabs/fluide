@@ -285,19 +285,21 @@
             }
             _this.el.addEventListener('mouseenter', function (event) { return _this.mouseEnter(event); });
             _this.el.addEventListener('mouseleave', function (event) { return _this.mouseLeave(event); });
+            _this.el.addEventListener('click', function (event) { return _this.mouseLeave(event); });
             _this.el.addEventListener('touchend', function (event) { return _this.mouseLeave(event); });
             return _this;
         }
         Tooltip.prototype.onTick = function () {
             if (this.tooltip !== null && this.tooltip.parentElement !== null) {
-                this.elementMoved.call(this);
                 if (this.el.parentElement === null) {
                     document.body.removeChild(this.tooltip);
-                    window.onscroll = null;
+                }
+                else {
+                    this.updatePosition.call(this);
                 }
             }
         };
-        Tooltip.prototype.mouseEnter = function (event) {
+        Tooltip.prototype.show = function () {
             var text = this.el.getAttribute('alt');
             this.tooltip = document.createElement('div');
             this.tooltip.classList.add('tooltip', this.position);
@@ -306,13 +308,19 @@
             var _a = this.calculatePosition(), left = _a.left, top = _a.top;
             this.tooltip.style.left = left + 'px';
             this.tooltip.style.top = top + 'px';
-            // window.onscroll = this.mouseScroll.bind(this)
+        };
+        Tooltip.prototype.hide = function () {
+            if (this.tooltip.parentElement !== null) {
+                document.body.removeChild(this.tooltip);
+            }
+        };
+        Tooltip.prototype.mouseEnter = function (event) {
+            this.show();
         };
         Tooltip.prototype.mouseLeave = function (event) {
-            document.body.removeChild(this.tooltip);
-            // window.onscroll = null
+            this.hide();
         };
-        Tooltip.prototype.elementMoved = function (event) {
+        Tooltip.prototype.updatePosition = function () {
             var _a = this.calculatePosition(), left = _a.left, top = _a.top;
             this.tooltip.style.left = left + 'px';
             this.tooltip.style.top = top + 'px';
