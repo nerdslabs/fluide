@@ -1,10 +1,9 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
   "private": true,
   "scripts": {
     "server": "hexo server",
-    "deploy": "node prepare.js && hexo generate && hexo deploy"
+    "generate": "hexo clean && hexo generate",
+    "deploy": "node prepare.js && hexo clean && hexo generate && hexo deploy && rm -rf db.json public .deploy_git"
   },
   "hexo": {
     "version": "3.7.1"
@@ -14,13 +13,14 @@
     "hexo": "^3.7.1",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-index": "^0.2.1",
+    "hexo-generator-seo-friendly-sitemap": "^0.0.21",
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-sass": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
-    "hexo-server": "^0.3.2"
+    "hexo-server": "^0.3.3"
   },
   "devDependencies": {
-    "gzip-size": "^4.1.0"
+    "gzip-size": "^5.0.0"
   }
 }
