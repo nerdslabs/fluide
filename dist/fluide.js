@@ -188,7 +188,6 @@
             return _this;
         }
         Scrollbar.prototype.calculateSizes = function () {
-            this.el.style.overflow = 'auto';
             this.height = this.el.clientHeight;
             this.scrollHeight = this.el.scrollHeight;
             this.el.style.overflow = 'hidden';
