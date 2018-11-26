@@ -64,7 +64,7 @@ export default class Tooltip extends Module {
   }
 
   public hide() {
-    if (this.tooltip.parentElement !== null) {
+    if (this.tooltip.parentElement) {
       document.body.removeChild(this.tooltip)
     }
   }
