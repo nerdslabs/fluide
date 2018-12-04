@@ -45,8 +45,8 @@ export default class Events {
   private mouseWheel(this: Events, event: WheelEvent) {
     let distance = null
 
-    if (event.wheelDelta && (event.wheelDelta % 120) === 0) {
-      distance = -(event.wheelDelta / 10);
+    if (event.deltaY % 120 === 0) {
+      distance = -(event.deltaY / 10);
     } else {
       distance = event.deltaY
     }
