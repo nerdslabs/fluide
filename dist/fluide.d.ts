@@ -1,7 +1,7 @@
 /// <reference types="node" />
 declare module "polyfills/props" {
     import Module from "module";
-    export class Props {
+    export default class Props {
         tickTimout: NodeJS.Timer;
         tickInstances: Module[];
         private fps;
@@ -17,17 +17,17 @@ declare module "polyfills/props" {
     }
 }
 declare module "module" {
-    export interface Module {
+    export default interface Module {
         onTick(): any;
     }
-    export abstract class Module {
+    export default abstract class Module {
         el: HTMLElement;
         constructor(el: HTMLElement | string);
     }
 }
 declare module "modal/main" {
     import Module from "module";
-    export class Modal extends Module {
+    export default class Modal extends Module {
         private options;
         private opened;
         private content;
@@ -48,7 +48,7 @@ declare module "helpers" {
 }
 declare module "scrollbar/events" {
     import Scrollbar from "scrollbar/main";
-    export class Events {
+    export default class Events {
         private scrollbar;
         private currentY;
         private isMac;
@@ -68,7 +68,7 @@ declare module "scrollbar/events" {
 }
 declare module "scrollbar/main" {
     import Module from "module";
-    export class Scrollbar extends Module {
+    export default class Scrollbar extends Module {
         scroll: HTMLElement;
         bar: HTMLElement;
         scrollHeight: number;
@@ -97,7 +97,7 @@ declare module "tooltip/main" {
         RIGHT = "tooltip-right",
         CLASS = ""
     }
-    export class Tooltip extends Module {
+    export default class Tooltip extends Module {
         static Position: typeof Position;
         private tooltip;
         private position;
