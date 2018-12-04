@@ -39,8 +39,7 @@ export default class Tooltip extends Module {
 
   public onTick() {
     if (this.tooltip !== null && this.tooltip.parentElement !== null) {
-
-      if (this.el.parentElement === null) {
+      if (document.body.contains(this.el.parentElement) === false) {
         document.body.removeChild(this.tooltip)
       } else {
         this.updatePosition.call(this)
