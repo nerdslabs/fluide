@@ -34,6 +34,11 @@
     flex-basis: auto;
   }
 
+  .small-auto {
+    flex: 1 1 0px;
+    width: auto;
+  }
+
   @for $i from 1 through $grid-columns {
     .small-#{$i} {
       width: (100% / $grid-columns) * $i;
@@ -45,6 +50,11 @@
 
   @each $breakpoint in $grid-breakpoints-classes {
     @include breakpoint($breakpoint) {
+      .#{$breakpoint}-auto {
+        flex: 1 1 0px;
+        width: auto;
+      }
+      
       @for $i from 1 through $grid-columns {
         .#{$breakpoint}-#{$i} {
           width: (100% / $grid-columns) * $i;
