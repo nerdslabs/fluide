@@ -1,4 +1,6 @@
-<%- partial('_partial/head') %>
+<!DOCTYPE html>
+<html>
+<head><%- partial('_partial/head') %></head>
 <body class="<% if(is_home()){ %>body-front-page<% } %><% if(is_post()){ %>body-single-page<% } %><% if(is_archive()){ %>body-archive<% } %><% if(is_year()){ %>body-year<% } %><% if(is_month()){ %>body-month<% } %><% if(is_category()){ %>body-category<% } %><% if(is_tag()){ %>body-tag<% } %>">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJDZZKZ"
@@ -6,21 +8,17 @@
   <!-- End Google Tag Manager (noscript) -->
   <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
   <main><%- body %></main>
-  <%- 
-    //partial('_partial/mobile-nav', null, {cache: !config.relative_link}) 
-  %>
   <footer>
-    <!-- <div class="container"> -->
-      <div class="row">
-        <div class="small-12 large-6 cell">
-          <a href="https://nerdslabs.co/" class="crafted"><img src="https://nerdslabs.co/images/logo-powered.svg" alt=""></a>
-        </div>
-        <div class="small-12 large-6 cell text-center large-text-right">
-          <div class="copy">&copy; <%= date(new Date(), 'YYYY') %></div>
-        </div>
+    <div class="row">
+      <div class="small-12 large-6 cell">
+        <a href="https://nerdslabs.co/" class="crafted"><img src="https://nerdslabs.co/images/logo-powered.svg" alt=""></a>
       </div>
-    <!-- </div> -->
+      <div class="small-12 large-6 cell text-center large-text-right">
+        <div class="copy">&copy; <%= date(new Date(), 'YYYY') %></div>
+      </div>
+    </div>
   </footer>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/nerdslabs/fluide/dist/fluide.min.js"></script>
   <%- js('js/script.js') %>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   <script type="text/javascript"> docsearch({

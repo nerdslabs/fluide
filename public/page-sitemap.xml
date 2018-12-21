@@ -8,28 +8,28 @@
     
     <url>
         <loc>https://fluide.nerdslabs.co/docs/</loc>
-        <lastmod>2018-06-27T14:48:42.079Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://fluide.nerdslabs.co/docs/css/arrangement.html</loc>
-        <lastmod>2018-06-25T17:37:16.595Z</lastmod>
+        <lastmod>2018-12-20T19:57:05.611Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://fluide.nerdslabs.co/docs/css/container.html</loc>
-        <lastmod>2018-06-25T17:22:19.528Z</lastmod>
+        <lastmod>2018-12-20T19:57:05.610Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://fluide.nerdslabs.co/docs/css/arrangement.html</loc>
+        <lastmod>2018-12-20T19:57:05.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://fluide.nerdslabs.co/docs/css/grid.html</loc>
-        <lastmod>2018-06-25T17:22:19.528Z</lastmod>
+        <lastmod>2018-12-20T19:57:05.610Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
