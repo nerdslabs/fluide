@@ -1,38 +1,50 @@
 @mixin scrollbar {
-  .scrollbar {
+  .scrollbar-wrapper {
+    position: relative;
     overflow: hidden;
-    display: inline-block;
-    width: 100%;
-  }
 
-  .scrollbar + .scrollbar-handler {
-    display: inline-block;
-    width: 12px;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0, 1, 1, 1);
-  }
+    .scrollbar {
+      overflow: scroll;
+      display: inline-block;
+      right: -20px;
+      width: calc(100% + 20px) !important;
+      padding: 0 34px 0 0;
+    }
 
-  .scrollbar + .scrollbar-handler:hover, .scrollbar + .scrollbar-handler.scroll-active {
-    opacity: 1;
-  }
+    .scrollbar + .scrollbar-handler {
+      display: inline-block;
+      width: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0, 1, 1, 1);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      user-select: none;
+    }
 
-  .scrollbar + .scrollbar-handler > .bar {
-    width: 10px;
-    margin: 0 1px;
-    background: rgba(0, 0, 0, 0.3);
-    opacity: .8;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: background .3s ease-in-out;
-
-    &:hover {
+    .scrollbar + .scrollbar-handler:hover, .scrollbar + .scrollbar-handler.scroll-active {
       opacity: 1;
     }
 
-    &:active {
-      opacity: 1;
-      background: rgba(0, 0, 0, 0.5);
+    .scrollbar + .scrollbar-handler > .bar {
+      width: 10px;
+      margin: 0 1px;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: .8;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: background .3s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:active {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import Events from './events'
 
 export default class Scrollbar extends Module {
 
+  public wrapper: HTMLElement
   public scroll: HTMLElement
   public bar: HTMLElement
 
@@ -24,18 +25,25 @@ export default class Scrollbar extends Module {
   constructor(el: HTMLElement) {
     super(el)
 
+    this.wrap()
     this.createScroll()
     this.calculateSizes()
+  }
+
+  public wrap() {
+    this.el.classList.add('scrollbar')
+
+    this.wrapper = document.createElement('div');
+    this.wrapper.className = 'scrollbar-wrapper'
+    this.el.parentNode.insertBefore(this.wrapper, this.el);
+    this.wrapper.appendChild(this.el);
   }
 
   public calculateSizes() {
     this.height = this.el.clientHeight
     this.scrollHeight = this.el.scrollHeight
-    this.el.style.overflow = 'hidden'
-    this.el.style.display = 'inline-block'
 
     this.el.style.width = null
-    this.el.style.width = 'calc(100% - ' + this.scroll.offsetWidth + 'px)'
     this.width = this.el.clientWidth
 
     const visibleProportion = this.height / this.scrollHeight
@@ -58,12 +66,6 @@ export default class Scrollbar extends Module {
 
   public move(distance: number) {
     this.el.scrollTop = (distance + this.el.scrollTop)
-
-    this.scroll.className = this.scroll.className.indexOf('scroll-active') > 0 ? this.scroll.className : this.scroll.className + ' scroll-active'
-    clearTimeout(this.scrollClass)
-    this.scrollClass = setTimeout(() => {
-      this.scroll.className = this.scroll.className.replace(/\s*scroll-active\s*/g, '')
-    }, 500)
   }
 
   public setBarPosition() {
@@ -78,6 +80,12 @@ export default class Scrollbar extends Module {
     }
 
     this.bar.style.marginTop = this.position + 'px';
+
+    this.scroll.classList.add('scroll-active')
+    clearTimeout(this.scrollClass)
+    this.scrollClass = setTimeout(() => {
+      this.scroll.classList.remove('scroll-active')
+    }, 500)
   }
 
   public onTick() {
