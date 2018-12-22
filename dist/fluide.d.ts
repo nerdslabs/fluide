@@ -51,14 +51,9 @@ declare module "scrollbar/events" {
     export default class Events {
         private scrollbar;
         private currentY;
-        private isMac;
-        private isWheeling;
-        private watcher;
-        private fps;
         constructor(scrollbar: Scrollbar);
         private mouseDown;
         private mouseMove;
-        private mouseWheel;
         private mouseUp;
         private touchStart;
         private touchMove;
@@ -69,6 +64,7 @@ declare module "scrollbar/events" {
 declare module "scrollbar/main" {
     import Module from "module";
     export default class Scrollbar extends Module {
+        wrapper: HTMLElement;
         scroll: HTMLElement;
         bar: HTMLElement;
         scrollHeight: number;
@@ -81,6 +77,7 @@ declare module "scrollbar/main" {
         private position;
         private scrollClass;
         constructor(el: HTMLElement);
+        wrap(): void;
         calculateSizes(): void;
         move(distance: number): void;
         setBarPosition(): void;

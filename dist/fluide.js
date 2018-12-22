@@ -127,16 +127,10 @@
     var Events = /** @class */ (function () {
         function Events(scrollbar) {
             var _this = this;
-            this.isMac = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i);
-            this.isWheeling = null;
-            this.watcher = null;
-            this.fps = 1000 / 24;
             this.scrollbar = scrollbar;
-            this.scrollbar.el.onwheel = function (event) { return _this.mouseWheel(event); };
-            this.scrollbar.scroll.onwheel = function (event) { return _this.mouseWheel(event); };
             this.scrollbar.bar.onmousedown = function (event) { return _this.mouseDown(event); };
+            this.scrollbar.bar.ontouchstart = function (event) { return _this.touchStart(event); };
             this.scrollbar.el.onscroll = function (event) { return _this.userScrolled(event); };
-            this.scrollbar.el.ontouchstart = function (event) { return _this.touchStart(event); };
             document.onmouseup = function (event) { return _this.mouseUp(event); };
             document.ontouchend = function (event) { return _this.touchEnd(event); };
         }
@@ -153,19 +147,6 @@
             this.currentY = event.pageY;
             this.scrollbar.move(scrollDistance);
         };
-        Events.prototype.mouseWheel = function (event) {
-            var distance = null;
-            if (event.deltaY % 120 === 0) {
-                distance = -(event.deltaY / 10);
-            }
-            else {
-                distance = event.deltaY;
-            }
-            if ((distance > 0 && this.scrollbar.el.scrollTop < (this.scrollbar.scrollHeight - this.scrollbar.height)) || (distance < 0 && this.scrollbar.el.scrollTop > 0)) {
-                event.preventDefault();
-                this.scrollbar.move(distance);
-            }
-        };
         Events.prototype.mouseUp = function (event) {
             document.onmousemove = null;
         };
@@ -174,7 +155,7 @@
             var touch = event.touches[0] || null;
             if (event.touches.length === 1 && touch !== null) {
                 this.currentY = touch.pageY;
-                this.scrollbar.el.ontouchmove = function (e) { return _this.touchMove(e); };
+                this.scrollbar.bar.ontouchmove = function (e) { return _this.touchMove(e); };
             }
         };
         Events.prototype.touchMove = function (event) {
@@ -182,7 +163,7 @@
             var touch = event.touches[0] || null;
             if (event.touches.length === 1 && touch !== null) {
                 var moveDistance = (touch.pageY - this.currentY);
-                var scrollDistance = -moveDistance;
+                var scrollDistance = (moveDistance / this.scrollbar.maxPosition) * (this.scrollbar.scrollHeight - this.scrollbar.height);
                 this.currentY = touch.pageY;
                 this.scrollbar.move(scrollDistance);
             }
@@ -203,17 +184,22 @@
             _this.maxPosition = 0;
             _this.position = 0;
             _this.scrollClass = null;
+            _this.wrap();
             _this.createScroll();
             _this.calculateSizes();
             return _this;
         }
+        Scrollbar.prototype.wrap = function () {
+            this.el.classList.add('scrollbar');
+            this.wrapper = document.createElement('div');
+            this.wrapper.className = 'scrollbar-wrapper';
+            this.el.parentNode.insertBefore(this.wrapper, this.el);
+            this.wrapper.appendChild(this.el);
+        };
         Scrollbar.prototype.calculateSizes = function () {
             this.height = this.el.clientHeight;
             this.scrollHeight = this.el.scrollHeight;
-            this.el.style.overflow = 'hidden';
-            this.el.style.display = 'inline-block';
             this.el.style.width = null;
-            this.el.style.width = 'calc(100% - ' + this.scroll.offsetWidth + 'px)';
             this.width = this.el.clientWidth;
             var visibleProportion = this.height / this.scrollHeight;
             if (this.height * visibleProportion > 30) {
@@ -230,15 +216,10 @@
             this.setBarPosition();
         };
         Scrollbar.prototype.move = function (distance) {
-            var _this = this;
             this.el.scrollTop = (distance + this.el.scrollTop);
-            this.scroll.className = this.scroll.className.indexOf('scroll-active') > 0 ? this.scroll.className : this.scroll.className + ' scroll-active';
-            clearTimeout(this.scrollClass);
-            this.scrollClass = setTimeout(function () {
-                _this.scroll.className = _this.scroll.className.replace(/\s*scroll-active\s*/g, '');
-            }, 500);
         };
         Scrollbar.prototype.setBarPosition = function () {
+            var _this = this;
             var position = (this.el.scrollTop / (this.scrollHeight - this.height)) * this.maxPosition;
             if (position <= 0) {
                 this.position = 0;
@@ -250,6 +231,11 @@
                 this.position = this.maxPosition;
             }
             this.bar.style.marginTop = this.position + 'px';
+            this.scroll.classList.add('scroll-active');
+            clearTimeout(this.scrollClass);
+            this.scrollClass = setTimeout(function () {
+                _this.scroll.classList.remove('scroll-active');
+            }, 500);
         };
         Scrollbar.prototype.onTick = function () {
             if (this.el.scrollHeight !== this.scrollHeight) {
