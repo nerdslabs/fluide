@@ -4,6 +4,7 @@
 @import "settings.scss";
 
 @import "utils/typography.scss";
+@import "utils/spacing.scss";
 @import "utils/float.scss";
 @import "grid/grid.scss";
 
@@ -12,6 +13,7 @@
 @import "components/tooltip.scss";
 
 @include typography;
+@include spacing;
 @include text-aligments;
 @include grid-base;
 @include grid-order;

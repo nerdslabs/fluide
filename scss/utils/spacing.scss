@@ -1,0 +1,45 @@
+@mixin spacing {
+  @each $breakpoint in $breakpoints-classes {
+    @include breakpoint($breakpoint) {
+      $breakpoint-class: if($breakpoint == $-nf-zero-breakpoint, '', '#{$breakpoint}-');
+
+      @each $direction in ('left', 'right', 'top', 'bottom', 'vertical', 'horizontal', 'all') {
+        @for $i from 0 through $spacing-points {
+          @if $direction == 'horizontal' {
+            .#{$breakpoint-class}m#{str-slice($direction, 0, 1)}-#{$i} {
+              margin-left: #{$i * 0.25}rem !important;
+              margin-right: #{$i * 0.25}rem !important;
+            }
+            .#{$breakpoint-class}p#{str-slice($direction, 0, 1)}-#{$i} {
+              padding-left: #{$i * 0.25}rem !important;
+              padding-right: #{$i * 0.25}rem !important;
+            }
+          } @else if $direction == 'vertical' {
+            .#{$breakpoint-class}m#{str-slice($direction, 0, 1)}-#{$i} {
+              margin-top: #{$i * 0.25}rem !important;
+              margin-bottom: #{$i * 0.25}rem !important;
+            }
+            .#{$breakpoint-class}p#{str-slice($direction, 0, 1)}-#{$i} {
+              padding-top: #{$i * 0.25}rem !important;
+              padding-bottom: #{$i * 0.25}rem !important;
+            }
+          } @else if $direction == 'all' {
+            .#{$breakpoint-class}m-#{$i} {
+              margin: #{$i * 0.25}rem !important;
+            }
+            .#{$breakpoint-class}p-#{$i} {
+              padding: #{$i * 0.25}rem !important;
+            }
+          } @else {
+            .#{$breakpoint-class}m#{str-slice($direction, 0, 1)}-#{$i} {
+              margin-#{$direction}: #{$i * 0.25}rem !important;
+            }
+            .#{$breakpoint-class}p#{str-slice($direction, 0, 1)}-#{$i} {
+              padding-#{$direction}: #{$i * 0.25}rem !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
