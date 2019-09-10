@@ -14,7 +14,7 @@ const fileJS = fs.readFileSync('../library/dist/fluide.min.js', "utf8")
 const sizeBytesJS = gzipSize.sync(fileJS)
 const sizeJS = Math.round((sizeBytesJS / 1024) * 100) / 100
 
-const size = sizeCSS + sizeJS
+const size = Math.round((sizeCSS + sizeJS) * 100) / 100
 
 console.info("Writing size of files to templates (CSS: " + sizeCSS + ", JS: " + sizeJS + ")")
 const indexFile = fs.readFileSync('./themes/fluide/layout/index.ejs', "utf8")
