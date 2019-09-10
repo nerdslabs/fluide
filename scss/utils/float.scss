@@ -11,7 +11,7 @@
     text-align: center !important;
   }
 
-  @each $breakpoint in $grid-breakpoints-classes {
+  @each $breakpoint in $breakpoints-classes {
     @include breakpoint($breakpoint) {
       .#{$breakpoint}-text-left {
         text-align: left !important;

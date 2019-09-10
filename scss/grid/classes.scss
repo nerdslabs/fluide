@@ -34,21 +34,7 @@
     flex-basis: auto;
   }
 
-  .small-auto {
-    flex: 1 1 0px;
-    width: auto;
-  }
-
-  @for $i from 1 through $grid-columns {
-    .small-#{$i} {
-      width: (100% / $grid-columns) * $i;
-    }
-    .small-offset-#{$i} {
-      margin-left: (100% / $grid-columns) * $i;
-    }
-  }
-
-  @each $breakpoint in $grid-breakpoints-classes {
+  @each $breakpoint in $breakpoints-classes {
     @include breakpoint($breakpoint) {
       .#{$breakpoint}-auto {
         flex: 1 1 0px;

@@ -1,11 +1,5 @@
-@mixin grid-order() {
-  @for $i from 1 through $grid-order-points {
-    .small-order-#{$i} {
-      order: $i;
-    }
-  }
-  
-  @each $breakpoint in $grid-breakpoints-classes {
+@mixin grid-order() {  
+  @each $breakpoint in $breakpoints-classes {
     @include breakpoint($breakpoint) {
       @for $i from 1 through $grid-order-points {
         .#{$breakpoint}-order-#{$i} {
