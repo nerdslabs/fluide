@@ -2,17 +2,17 @@
 
 @import url("https://file.myfontastic.com/QAGQqgNmKxCaYrC8P3BsjA/icons.css");
 
-$base-font-family: "Lato" !default;
+$base-font-family: "Lato";
 
 @import "../../../../node_modules/fluide/scss/fluide.scss";
 
-$black: #222222;
-$primary: #41338C;
-$accent: #AD2383;
+$black-color: #222222;
+$primary-color: #41338C;
+$secondary-color: #AD2383;
 
 body {
   background: #fcfcfc;
-  color: $black;
+  color: $black-color;
 
   &.body-front-page {
     header {
@@ -34,7 +34,7 @@ body {
 }
 
 a {
-  color: $black;
+  color: $black-color;
 }
 
 main {
@@ -49,11 +49,11 @@ header {
   padding: 0 30px;
   background: transparent;
   position: fixed;
-  color: $black;
+  color: $black-color;
   transition: all .2s ease-in-out;
 
   &.scrolled {
-    background: $primary;
+    background: $primary-color;
     color: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 
@@ -129,7 +129,7 @@ header {
         padding: 0 15px;
 
         &::placeholder {
-          color: $black;
+          color: $black-color;
           opacity: 1;
         }
       }
@@ -143,7 +143,7 @@ section {
   }
 
   .button {
-    background: $black;
+    background: $black-color;
     color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
     border-radius: 2px;
@@ -156,7 +156,7 @@ section {
     text-decoration: none;
 
     &.primary {
-      background: $accent;
+      background: $secondary-color;
     }
   }
 
@@ -183,7 +183,7 @@ section {
         height: calc(100% + 200px);
         width: calc(100% + 140px);
         transform: rotate(-2.5deg);
-        background: $primary;
+        background: $primary-color;
         z-index: 1;
       }
 
@@ -266,7 +266,7 @@ section {
         height: calc(100%);
         width: calc(100% + 140px);
         transform: rotate(2.5deg);
-        background: $accent;
+        background: $secondary-color;
         z-index: 1;
       }
 
@@ -282,7 +282,7 @@ section {
       .items {
         margin-top: 15px;
 
-        @include breakpoint(large) {
+        @include breakpoint(lg) {
           margin-top: 75px;
         }
 
@@ -294,7 +294,7 @@ section {
           margin-bottom: 16px;
           margin-top: 30px;
 
-          @include breakpoint(large) {
+          @include breakpoint(lg) {
             margin-top: 0;
           }
         }
@@ -374,7 +374,7 @@ section {
 
       @include grid-container($global-width - 300px);
 
-      @include breakpoint(large) {}
+      @include breakpoint(lg) {}
 
       h3:before {
         content: '';
@@ -385,7 +385,7 @@ section {
         margin-top: -100px;
       }
 
-      table {
+      h3#SCSS-variables + table {
         width: 100%;
 
         thead {
@@ -421,12 +421,12 @@ section {
       .grid-example {
         .cell {
           .box {
-            background: $primary;
+            background: $primary-color;
             padding: 10px 12px;
           }
 
           &:nth-child(2n) .box {
-            background: darken($primary, 10%);
+            background: darken($primary-color, 10%);
           }
         }
       }
@@ -449,7 +449,7 @@ section {
           border-bottom-right-radius: 6px;
 
           .row > .cell > div {
-            background: $primary;
+            background: $primary-color;
             padding: .75rem;
             color: #fff;
           }
@@ -488,15 +488,15 @@ section {
         }
 
         .variable, .template-variable, .attribute, .name, .regexp, .link, .name, .selector-id, .selector-class {
-          color: $accent;
+          color: $secondary-color;
         }
 
         .number, .meta, .built_in, .builtin-name, .literal, .type, .params, .tag {
-          color: $black;
+          color: $black-color;
         }
 
         .string, .symbol, .bullet {
-          color: lighten(adjust-hue($primary, 20%), 25%);
+          color: lighten(adjust-hue($primary-color, 20%), 25%);
         }
 
         .title, .section {
@@ -548,7 +548,7 @@ footer {
   z-index: 3;
 
   // background: #fff;
-  // color: $black;
+  // color: $black-color;
 
   .crafted {
     display: inline-block;

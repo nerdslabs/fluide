@@ -8,6 +8,7 @@ submenu:
   Responsive: Responsive
   Basic usage: Basic-usage
   Margins between cells: Margins-between-cells
+  Auto sizing: Auto-sizing
   SCSS variables: SCSS-variables
 ---
 
@@ -18,24 +19,32 @@ Grid is based on **Flexbox**.
 
 | Breakpoint class | Breakpoint minimal width |
 | ---------------- |--------------------------|
-| `small-#`        | `> 0px`                  |
-| `medium-#`       | `> 640px`                |
-| `large-#`        | `> 1024px`               |
-| `xlarge-#`       | `> 1200px`               |
+| `sm-#`        | `> 0px`                  |
+| `md-#`       | `> 640px`                |
+| `lg-#`        | `> 1024px`               |
+| `xl-#`       | `> 1200px`               |
 
 ### Basic usage
 {% code html %}
 <div class="row">
-  <div class="small-12 large-6 cell"><div>small-12 large-6</div></div>
-  <div class="small-12 large-6 cell"><div>small-12 large-6</div></div>
+  <div class="sm-12 lg-6 cell"><div>sm-12 lg-6</div></div>
+  <div class="sm-12 lg-6 cell"><div>sm-12 lg-6</div></div>
 </div>
 {% endcode %}
 
 ### Margins between cells
 {% code html %}
 <div class="row row-margin">
-  <div class="small-12 large-6 cell"><div>small-12 large-6</div></div>
-  <div class="small-12 large-6 cell"><div>small-12 large-6</div></div>
+  <div class="sm-12 lg-6 cell"><div>sm-12 lg-6</div></div>
+  <div class="sm-12 lg-6 cell"><div>sm-12 lg-6</div></div>
+</div>
+{% endcode %}
+
+### Auto sizing
+{% code html %}
+<div class="row row-margin">
+  <div class="sm-6 lg-4 cell"><div>sm-6 lg-4</div></div>
+  <div class="sm-6 lg-auto cell"><div>sm-6 lg-auto</div></div>
 </div>
 {% endcode %}
 
@@ -44,5 +53,5 @@ Grid is based on **Flexbox**.
 | --------------------------- |--------------------------------------------------------------------------------|
 | `$grid-columns`             | `12`                                                                           |
 | `$grid-column-gutter`       | `10px`                                                                         |
-| `$grid-breakpoints`         | `( small: 0, medium: 640px, large: 1024px, xlarge: 1200px, xxlarge: 1440px, )` |
-| `$grid-breakpoints-classes` | `( medium, large, xlarge, )`                                                   |
+| `$grid-breakpoints`         | `( sm: 0, md: 640px, lg: 1024px, xl: 1200px, xxl: 1440px, )` |
+| `$grid-breakpoints-classes` | `( sm, md, lg, xl, )`                                            |

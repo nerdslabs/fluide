@@ -4,22 +4,21 @@
 <body class="<% if(is_home()){ %>body-front-page<% } %><% if(is_post()){ %>body-single-page<% } %><% if(is_archive()){ %>body-archive<% } %><% if(is_year()){ %>body-year<% } %><% if(is_month()){ %>body-month<% } %><% if(is_category()){ %>body-category<% } %><% if(is_tag()){ %>body-tag<% } %>">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJDZZKZ"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  <%- js('js/script.js') %>
   <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
   <main><%- body %></main>
   <footer>
     <div class="row">
-      <div class="small-12 large-6 cell">
+      <div class="sm-12 lg-6 cell">
         <a href="https://nerdslabs.co/" class="crafted"><img src="https://nerdslabs.co/images/logo-powered.svg" alt=""></a>
       </div>
-      <div class="small-12 large-6 cell text-center large-text-right">
+      <div class="sm-12 lg-6 cell text-center lg-text-right">
         <div class="copy">&copy; <%= date(new Date(), 'YYYY') %></div>
       </div>
     </div>
   </footer>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/nerdslabs/fluide/dist/fluide.min.js"></script>
-  <%- js('js/script.js') %>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   <script type="text/javascript"> docsearch({
       apiKey: '9fec29c7bc8e21edbfa15ee75d174df3',

@@ -9,7 +9,8 @@
     "version": "3.7.1"
   },
   "dependencies": {
-    "fluide": "git+https://git@github.com/nerdslabs/fluide.git",
+    "@babel/core": "^7.2.2",
+    "fluide": "git+https://git@github.com/nerdslabs/fluide.git#06e0807921064c6ea72a060278d43a431315f4ac",
     "hexo": "^3.7.1",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-index": "^0.2.1",
@@ -21,6 +22,9 @@
     "hexo-server": "^0.3.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.2.3",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
     "gzip-size": "^5.0.0"
   }
 }

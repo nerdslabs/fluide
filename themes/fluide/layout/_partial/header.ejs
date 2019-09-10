@@ -1,10 +1,10 @@
 <header>
   <div class="container full">
     <div class="row">
-      <div class="small-12 large-6 cell">
+      <div class="sm-12 lg-6 cell">
         <a class="logo" href="<%- url_for('/') %>"><% if (!is_home()) { %><%- image_tag('images/logo.svg') %><% } %><span>fluide</span></a>
       </div>
-      <div class="small-12 large-6 cell text-right">
+      <div class="sm-12 lg-6 cell text-right">
         <nav>
           <a class="nav-icon"></a>
           <% for (var i in theme.menu){ %>

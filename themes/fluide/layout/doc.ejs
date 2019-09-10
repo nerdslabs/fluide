@@ -21,6 +21,21 @@
         <% }); %>
       </li>
     </ul>
+    <div class="sep">JS</div>
+    <ul>
+      <li>
+        <% site.pages.find({layout: 'doc', type: 'js'}).sort('order').each(function(page) { %>
+          <li class="<%= is_current(page.path, {'strict': true}) ? 'current' : '' %>"><a href="<%- url_for(page.path) %>"><%= page.title %></a></li>
+          <% if(typeof page.submenu != typeof undefined && is_current(page.path, {'strict': true})) { %>
+          <ul>
+            <% _.forEach(page.submenu, function(hash, title) { %>
+            <li><a href="<%- url_for(page.path) %>#<%= hash %>"><%= title %></a></li>
+            <% }); %>
+          </ul>
+          <% } %>
+        <% }); %>
+      </li>
+    </ul>
   </aside>
   <div class="wrapper">
     <div class="article-meta">
