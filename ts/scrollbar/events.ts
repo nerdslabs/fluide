@@ -61,7 +61,7 @@ export default class Events {
     document.ontouchmove = null
   }
 
-  private userScrolled(this: Events, event: UIEvent) {
+  private userScrolled(this: Events, event: Event) {
     this.scrollbar.setBarPosition()
   }
 }
