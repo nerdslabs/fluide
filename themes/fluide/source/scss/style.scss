@@ -18,6 +18,10 @@ body {
     header {
       color: #fff;
 
+      .menu-mobile {
+        display: none;
+      }
+
       a {
         color: #fff;
       }
