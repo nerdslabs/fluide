@@ -1,12 +1,15 @@
 <header>
   <div class="container full">
     <div class="row">
-      <div class="sm-12 lg-6 cell">
-        <a class="logo" href="<%- url_for('/') %>"><% if (!is_home()) { %><%- image_tag('images/logo.svg') %><% } %><span>fluide</span></a>
+      <div class="sm-4 lg-6 cell">
+        <div class="menu-mobile"><div></div></div>
+        <a class="logo" href="<%- url_for('/') %>">
+          <%- image_tag('images/logo.svg', {class: "logo-image"}) %>
+          <span>fluide</span>
+        </a>
       </div>
-      <div class="sm-12 lg-6 cell text-right">
+      <div class="sm-8 lg-6 cell text-right">
         <nav>
-          <a class="nav-icon"></a>
           <% for (var i in theme.menu){ %>
             <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
           <% } %>

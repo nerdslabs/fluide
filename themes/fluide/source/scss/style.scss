@@ -40,22 +40,35 @@ a {
 main {
   position: relative;
   z-index: 1;
+  width: 100vw;
+  overflow: hidden;
 }
 
 header {
   position: absolute;
   width: 100%;
   z-index: 2;
-  padding: 0 30px;
+  padding: 0 15px;
   background: transparent;
   position: fixed;
   color: $black-color;
   transition: all .2s ease-in-out;
 
+  @include breakpoint(lg) {
+    padding: 0 30px;
+  }
+
   &.scrolled {
     background: $primary-color;
     color: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+
+    .menu-mobile {
+      
+      & > div, & > div::before, & > div::after {
+        background: #fff;
+      }
+    }
 
     a {
       color: #fff;
@@ -70,15 +83,73 @@ header {
     }
   }
 
+  .menu-mobile {
+    height: 27px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 5px;
+    
+    & > div, & > div::before, & > div::after {
+      display: block;
+      width: 31px;
+      height: 4px;
+      position: relative;
+      
+      background: $black-color;
+      border-radius: 3px;
+      
+      z-index: 1;
+      
+      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                  background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                  opacity 0.55s ease;
+    }
+
+    & > div::before {
+      content: '';
+      transform: translateY(10px);
+    }
+
+    & > div::after {
+      content: '';
+      transform: translateY(16px);
+    }
+
+    &.opened {
+
+      & > div {
+        transform: rotate(45deg) translate(6px, 6px)
+      }
+
+      & > div::before {
+        transform: translate(-6px, 0);
+        opacity: 0;
+      }
+
+      & > div::after {
+        transform: rotate(-90deg) translate(4px, 0px);
+      }
+    }
+    
+    @include breakpoint(lg) {
+      display: none;
+    }
+  }
+
   .logo {
     display: inline-block;
     padding: 16px 0;
 
-    img {
+    img.logo-image {
       height: 41px;
-      display: inline-block;
+      display: none;
       vertical-align: middle;
       margin-right: 15px;
+
+      @include breakpoint(lg) {
+        display: inline-block;
+      }
     }
 
     span {
@@ -113,11 +184,16 @@ header {
     }
 
     .search-algolia {
-      display: inline-block;
+      display: none;
       vertical-align: middle;
-      margin-left: 25px;
       background: rgba(0, 0, 0, 0.15);
       border-radius: 4px;
+      margin-top: 0;
+      margin-left: 25px;
+
+      @include breakpoint(lg) {
+        display: inline-block;
+      }
 
       input {
         font-family: $base-font-family;
@@ -319,12 +395,20 @@ section {
       background: darken(#fff, 3%);
       padding: 120px 30px 0;
       width: 300px;
-      margin-left: -300px;
       transition: margin .5s ease-in-out;
       flex: none;
+      margin-left: 0;
 
       &.expanded {
-        margin-left: 0;
+        margin-left: -300px;
+      }
+
+      @include breakpoint(md) {
+        margin-left: -300px;
+
+        &.expanded {
+          margin-left: 0;
+        }
       }
 
       .sep {

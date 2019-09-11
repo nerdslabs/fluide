@@ -23,4 +23,18 @@ window.onload = function() {
 
   headerScrolled();
   document.addEventListener("scroll", headerScrolled);
+
+  const mobileMenuHandled = document.querySelector('.menu-mobile')
+  const aside = document.querySelector('aside')
+  mobileMenuHandled.addEventListener('click', (event) => {
+    event.preventDefault()
+
+    if (mobileMenuHandled.classList.contains('opened')) {
+      mobileMenuHandled.classList.remove('opened')
+      aside.classList.add('expanded')
+    } else {
+      mobileMenuHandled.classList.add('opened')
+      aside.classList.remove('expanded')
+    }
+  })
 };
