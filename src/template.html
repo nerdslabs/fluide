@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+	<meta name='theme-color' content='#333333'>
+
+	%sapper.base%
+
+	<link rel='manifest' href='manifest.json'>
+	<link rel='icon' type='image/png' href='favicon.png'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+	%sapper.styles%
+
+	%sapper.head%
+</head>
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJDZZKZ" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<div id='sapper'>%sapper.html%</div>
+  <footer>
+    <div class="row">
+      <div class="sm-12 lg-6 cell">
+        <a href="https://nerdslabs.co/" class="crafted"><img src="https://nerdslabs.co/images/logo-powered.svg" alt=""></a>
+      </div>
+      <div class="sm-12 lg-6 cell text-center lg-text-right">
+        <div class="copy">&copy; 2019</div>
+      </div>
+    </div>
+  </footer>
+
+	%sapper.scripts%
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+      apiKey: '9fec29c7bc8e21edbfa15ee75d174df3',
+      indexName: 'fluide',
+      inputSelector: '.search-algolia input',
+      debug: false // Set debug to true if you want to inspect the dropdown 
+    }); 
+  </script>
+</body>
+</html>

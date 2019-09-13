@@ -1,0 +1,8 @@
+{
+	"background_color": "#ffffff",
+	"theme_color": "#41338C",
+	"name": "fluide",
+	"short_name": "fluide",
+	"display": "minimal-ui",
+	"start_url": "/"
+}
